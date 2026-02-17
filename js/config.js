@@ -3,7 +3,7 @@
 
 window.SUPABASE_CONFIG = {
     url: window.__ENV_SUPABASE_URL__ || 'https://xdoqgounkfgpfjyvljxc.supabase.co',
-    key: window.__ENV_SUPABASE_ANON_KEY__ || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhkb3Fnb3Vua2ZncGZqeXZsanhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzMzA0MzIsImV4cCI6MjA4NjkwNjQzMn0.-HEbJYKhUgpamlslKhmMkbLY1iERYtT_DTabjtIeAqU'
+    key: window.__ENV_SUPABASE_ANON_KEY__ || 'sb_publishable_ERhyFUNm9ijnQlnL97WFZQ_yqrZJWmU'
 };
 
 // Fonction pour initialiser les configurations
