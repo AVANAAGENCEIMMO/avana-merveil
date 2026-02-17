@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration Supabase - Annonces Immobilières</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .setup-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .setup-container h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .setup-container p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+            font-family: 'Courier New', monospace;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group .helper-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-save {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-save:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-test {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-test:hover {
+            background: #e8e8e8;
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .info-box strong {
+            color: #333;
+        }
+
+        .link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .saved-config {
+            background: #f0f7ff;
+            border: 1px solid #b3d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .saved-config.show {
+            display: block;
+        }
+
+        .saved-config strong {
+            color: #0c5460;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .saved-config p {
+            margin: 0;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-container">
+        <h1>Configuration Supabase</h1>
+        <p>Configurez vos clés Supabase pour activer le système de publication d'annonces.</p>
+
+        <div class="info-box">
+            <strong>Où trouver vos clés?</strong><br>
+            1. Allez sur <a href="https://supabase.com" class="link" target="_blank">supabase.com</a><br>
+            2. Ouvrez votre projet<br>
+            3. Cliquez sur Settings → API<br>
+            4. Copiez "Project URL" et "anon public"
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div id="savedConfig" class="saved-config">
+            <strong>Configuration actuellement chargée:</strong>
+            <p><strong>URL:</strong> <span id="savedUrl"></span></p>
+            <p><strong>Clé:</strong> <span id="savedKey"></span></p>
+        </div>
+
+        <form id="setupForm">
+            <div class="form-group">
+                <label for="url">URL Supabase *</label>
+                <input 
+                    type="text" 
+                    id="url" 
+                    placeholder="https://xxxxx.supabase.co"
+                    required
+                >
+                <div class="helper-text">Format: https://xxxxx.supabase.co</div>
+            </div>
+
+            <div class="form-group">
+                <label for="key">Clé Anonyme Supabase *</label>
+                <input 
+                    type="password" 
+                    id="key" 
+                    placeholder="eyJhbGc..."
+                    required
+                >
+                <div class="helper-text">Votre clé publique anonyme (non sensible)</div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-test" onclick="testConnection()">Tester la connexion</button>
+                <button type="submit" class="btn-save">Sauvegarder</button>
+            </div>
+        </form>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="publish-announce.html" class="link">← Retour à la publication d'annonces</a>
+        </div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // Charger la configuration sauvegardée au démarrage
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedConfig = localStorage.getItem('supabaseConfig');
+            if (savedConfig) {
+                try {
+                    const config = JSON.parse(savedConfig);
+                    document.getElementById('url').value = config.url;
+                    document.getElementById('key').value = config.key;
+                    showSavedConfig(config.url, config.key);
+                } catch (e) {
+                    console.error("[v0] Erreur lors du chargement de la configuration:", e);
+                }
+            }
+        });
+
+        // Afficher la configuration sauvegardée
+        function showSavedConfig(url, key) {
+            const savedBox = document.getElementById('savedConfig');
+            document.getElementById('savedUrl').textContent = url;
+            document.getElementById('savedKey').textContent = key.substring(0, 20) + '...';
+            savedBox.classList.add('show');
+        }
+
+        // Soumettre le formulaire
+        document.getElementById('setupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const url = document.getElementById('url').value.trim();
+            const key = document.getElementById('key').value.trim();
+
+            if (!url || !key) {
+                showMessage("Veuillez remplir tous les champs", "error");
+                return;
+            }
+
+            // Valider le format de l'URL
+            if (!url.includes('supabase.co')) {
+                showMessage("L'URL ne semble pas être une URL Supabase valide", "error");
+                return;
+            }
+
+            // Sauvegarder
+            saveConfig(url, key);
+            showMessage("Configuration sauvegardée avec succès! 🎉", "success");
+            showSavedConfig(url, key);
+
+            // Rediriger après 2 secondes
+            setTimeout(() => {
+                window.location.href = "publish-announce.html";
+            }, 2000);
+        });
+
+        // Tester la connexion
+        async function testConnection() {
+            const url = document.getElementById('url').value.trim();
+            const key = document.getElementById('key').value.trim();
+
+            if (!url || !key) {
+                showMessage("Veuillez remplir tous les champs d'abord", "error");
+                return;
+            }
+
+            showMessage("Test de la connexion en cours...", "info");
+
+            try {
+                const supabase = window.supabase.createClient(url, key);
+                const { data, error } = await supabase.from('announces').select('count', { count: 'exact', head: true });
+
+                if (error) {
+                    console.error("[v0] Erreur de connexion:", error);
+                    showMessage(`Erreur: ${error.message}`, "error");
+                    return;
+                }
+
+                showMessage("Connexion réussie! ✅ Vous pouvez maintenant sauvegarder.", "success");
+            } catch (error) {
+                console.error("[v0] Erreur lors du test:", error);
+                showMessage(`Erreur: ${error.message}`, "error");
+            }
+        }
+
+        // Afficher un message
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            messageDiv.className = `message show ${type}`;
+
+            if (type !== 'info') {
+                setTimeout(() => {
+                    messageDiv.classList.remove('show');
+                }, 5000);
+            }
+        }
+
+        // Charger les configurations depuis le config.js
+        function saveConfig(url, key) {
+            if (typeof window.saveConfig === 'function') {
+                window.saveConfig(url, key);
+            }
+        }
+    </script>
+</body>
+</html>

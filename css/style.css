@@ -1,0 +1,203 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(135deg, #0a2a43, #144b73);
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+header h1 {
+    margin-bottom: 5px;
+}
+
+/* INTRO */
+.intro {
+    text-align: center;
+    padding: 30px 15px;
+}
+
+/* PROPERTY CARD */
+.property {
+    display: flex;
+    background: white;
+    margin: 30px auto;
+    width: 85%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.property img {
+    width: 40%;
+    object-fit: cover;
+}
+
+/* DETAILS */
+.details {
+    padding: 25px;
+    width: 60%;
+}
+
+.details h3 {
+    margin-top: 0;
+}
+
+.price {
+    font-weight: bold;
+    color: #0a2a43;
+}
+
+/* CALENDAR INPUT */
+.calendarWidget {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+/* BUTTON */
+.reserveBtn {
+    margin-top: 15px;
+    padding: 12px;
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.reserveBtn:hover {
+    background: #1ebe5d;
+}
+
+/* FOOTER */
+/* STYLES POUR LE FOOTER */
+.footer {
+    background-color: #000000bb; /* Couleur sombre élégante */
+    color: #ffffff;
+    padding: 40px 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+.footer-section h3 {
+    font-size: 18px;
+    color: #fc0a0a; /* Accent de couleur */
+    margin-bottom: 10px;
+}
+
+.footer-section p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #f8f8f8;
+}
+
+.footer-section a {
+    color: #fc0a0a; /* Couleur des liens */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #28a745; /* Changement de couleur au survol */
+}
+
+/* ICÔNES SOCIALES */
+.social-icons {
+    position: fixed; /* Fixe les icônes à l'écran */
+    right: 20px; /* Espacement du bord droit de l'écran */
+    top: 50%; /* Centré verticalement */
+    transform: translateY(-50%); /* Ajuste la position pour être parfaitement centré verticalement */
+    z-index: 1000; /* Assure que les icônes sont au-dessus des autres éléments */
+}
+
+.social-icon {
+    display: block;
+    margin-bottom: 15px; /* Espace entre les icônes */
+}
+
+.social-icon img {
+    width: 30px; /* Taille des icônes */
+    height: 30px;
+    transition: transform 0.3s ease; /* Transition au survol */
+}
+
+.social-icon img:hover {
+    transform: scale(1.2); /* Agrandit l'icône au survol */
+}
+
+/* SECTION INFÉRIEURE DU FOOTER */
+/* SECTION "SUIVEZ-NOUS" */
+/* SECTION "SUIVEZ-NOUS" */
+.footer2-section {
+    display: flex;
+    flex-direction: column; /* Organise le titre et les icônes en vertical */
+    align-items: center; /* Centrer horizontalement */
+    text-align: center;
+    padding: 20px;
+}
+
+/* TITRE */
+.footer2-section h3 {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    color: #fc0a0a;
+    margin-bottom: 15px; /* Espacement entre le titre et la ligne d'icônes */
+}
+/* ICÔNES */
+.social2-icons {
+    display: flex; /* Met toutes les icônes sur une ligne */
+    justify-content: center; /* Centre les icônes horizontalement */
+    gap: 15px; /* Espacement entre les icônes */
+    width: 100%;
+    align-items: center;
+}
+
+.social2-icons a img {
+    width: 30px; /* Taille par défaut des icônes */
+    height: 30px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.social2-icons a:hover img {
+    transform: scale(1.1); /* Animation légère pour le survol */
+    opacity: 1; /* Pleine opacité au survol */
+}
+
+
+/* MOBILE */
+@media(max-width: 900px) {
+    .property {
+        flex-direction: column;
+    }
+
+    .property img,
+    .details {
+        width: 100%;
+    }
+}

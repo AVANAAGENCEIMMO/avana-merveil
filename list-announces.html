@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Annonces | AVANA Conciergerie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/announce.css">
+    <link rel="stylesheet" href="css/list-announces.css">
+</head>
+<body>
+
+<header>
+    <h1>AVANA Conciergerie</h1>
+    <p>Gestion professionnelle de locations saisonnières à Madagascar</p>
+</header>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="publish-announce.html">Publier une Annonce</a></li>
+        <li><a href="list-announces.html" class="active">Mes Annonces</a></li>
+    </ul>
+</nav>
+
+<main class="announce-container">
+    <section class="announces-section">
+        <div class="section-header">
+            <h2>Mes Annonces Publiées</h2>
+            <a href="publish-announce.html" class="btn btn-primary">+ Nouvelle Annonce</a>
+        </div>
+
+        <div id="filterSection" class="filter-section">
+            <input type="text" id="searchInput" class="search-input" placeholder="Rechercher une annonce...">
+            <select id="typeFilter" class="filter-select">
+                <option value="">Tous les types</option>
+                <option value="apartment">Appartement</option>
+                <option value="house">Maison</option>
+                <option value="studio">Studio</option>
+                <option value="villa">Villa</option>
+                <option value="office">Bureau</option>
+                <option value="commerce">Commerce</option>
+            </select>
+            <select id="statusFilter" class="filter-select">
+                <option value="">Tous les statuts</option>
+                <option value="rent">Location</option>
+                <option value="sale">Vente</option>
+                <option value="both">Location & Vente</option>
+            </select>
+        </div>
+
+        <div id="announcesContainer" class="announces-grid">
+            <p class="loading-text">Chargement de vos annonces...</p>
+        </div>
+
+        <div id="noResults" class="no-results" style="display: none;">
+            <p>📭 Aucune annonce trouvée</p>
+            <a href="publish-announce.html" class="btn btn-primary">Publier votre première annonce</a>
+        </div>
+    </section>
+</main>
+
+<!-- Modal pour les détails -->
+<div id="detailsModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <button class="close-modal">&times;</button>
+        <div id="modalBody" class="modal-body"></div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>À propos de nous</h3>
+            <p>Votre agence immobilière de confiance, spécialisée dans l'achat, la vente et la location de biens immobiliers.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Contactez-nous</h3>
+            <p>Email: <a href="mailto:contact@agence.com">contact@agence.com</a></p>
+            <p>Téléphone: <a href="tel:+261320000000">+261 32 000 00 00</a></p>
+            <p>Adresse: 123 Avenue de l'Immobilier, Antananarivo, Madagascar</p>
+        </div>
+        <div class="footer2-section">
+            <h3>Suivez-nous</h3>
+            <div class="social2-icons">
+                <a href="https://www.facebook.com/avann.johnrayan/" target="_blank">
+                    <img src="images/icon/2021_Facebook_icon.svg.png" alt="Facebook">
+                </a>
+                <a href="https://www.linkedin.com/in/avana-john-rayan-117804205" target="_blank">
+                    <img src="images/icon/Linkedin.svg" alt="LinkedIn">
+                </a>
+                <a href="https://www.instagram.com/agence.immobiliere.avana/" target="_blank">
+                    <img src="images/icon/Instagram.svg" alt="Instagram">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Votre Agence Immobilière. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- JS pour gérer la liste d'annonces -->
+<script src="js/list-announces.js"></script>
+
+</body>
+</html>

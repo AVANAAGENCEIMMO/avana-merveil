@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>AVANA Conciergerie | Location Saisonnière</title>
+
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/announce.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+    <h1>AVANA Conciergerie</h1>
+    <p>Gestion professionnelle de locations saisonnières à Madagascar</p>
+</header>
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="publish-announce.html" class="active">Publier une Annonce</a></li>
+        <li><a href="list-announces.html">Mes Annonces</a></li>
+    </ul>
+</nav>
+<section class="intro">
+    <h2>Nos appartements disponibles</h2>
+    <p>Vérifiez la disponibilité et réservez en ligne</p>
+</section>
+
+<!-- ===== BIEN 1 ===== -->
+<section class="property">
+    <img src="images/appartement.jpg" alt="Appartement Meublé">
+
+    <div class="details">
+        <h3>Appartement Meublé – Antananarivo</h3>
+        <p>🛏 2 chambres • 🚿 1 salle de bain • 📶 WiFi</p>
+        <p class="price">200 000 Ar / nuit</p>
+
+        <label>📅 Sélectionnez vos dates</label>
+        <input type="text" class="calendarWidget" data-bien="1" placeholder="Arrivée → Départ" readonly>
+
+        <p class="result"></p>
+        <button class="reserveBtn" style="display:none;">📲 Réserver via WhatsApp</button>
+    </div>
+</section>
+
+<!-- ===== BIEN 2 ===== -->
+<section class="property">
+    <img src="images/appartement2.jpg" alt="Appartement Standing">
+
+    <div class="details">
+        <h3>Appartement Standing – Centre-ville</h3>
+        <p>🛏 1 chambre • 🚿 1 salle de bain • 🍽 Cuisine équipée</p>
+        <p class="price">150 000 Ar / nuit</p>
+
+        <label>📅 Sélectionnez vos dates</label>
+        <input type="text" class="calendarWidget" data-bien="2" placeholder="Arrivée → Départ" readonly>
+
+        <p class="result"></p>
+        <button class="reserveBtn" style="display:none;">📲 Réserver via WhatsApp</button>
+    </div>
+</section>
+
+        <footer class="footer">
+            <div class="footer-container">
+                <!-- Section À propos -->
+                <div class="footer-section">
+                    <h3>À propos de nous</h3>
+                    <p>Votre agence immobilière de confiance, spécialisée dans l'achat, la vente et la location de biens immobiliers.</p>
+                </div>
+        
+                <!-- Section Contact -->
+                <div class="footer-section">
+                    <h3>Contactez-nous</h3>
+                    <p>Email: <a href="mailto:contact@agence.com">contact@agence.com</a></p>
+                    <p>Téléphone: <a href="tel:+261320000000">+261 32 000 00 00</a></p>
+                    <p>Adresse: 123 Avenue de l'Immobilier, Antananarivo, Madagascar</p>
+                </div>
+                <!-- Section Suivez-nous -->
+                <div class="footer2-section">
+                    <h3>Suivez-nous</h3>
+                    <div class="social2-icons">
+                        <!-- Première icône fixée à droite -->
+                        <a href="https://www.facebook.com/avann.johnrayan/" target="_blank">
+                            <img src="images/icon/2021_Facebook_icon.svg.png" alt="Facebook">
+                        </a>
+                        <!-- Autres icônes -->
+                        <a href="https://www.linkedin.com/in/avana-john-rayan-117804205" target="_blank">
+                            <img src="images/icon/Linkedin.svg" alt="LinkedIn">
+                        </a>
+                        <!-- Dernière icône petite, alignée en bas -->
+                        <a href="https://www.instagram.com/agence.immobiliere.avana/" target="_blank">
+                            <img src="images/icon/Instagram.svg" alt="Instagram">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Section Bas du footer -->
+            <div class="footer-bottom">
+                <p>&copy; 2025 Votre Agence Immobilière. Tous droits réservés.</p>
+            </div>
+        </footer>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+
+<!-- JS -->
+<script src="js/app.js"></script>
+</body>
+</html>

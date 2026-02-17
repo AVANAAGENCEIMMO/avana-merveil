@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publier une Annonce | AVANA Conciergerie</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/announce.css">
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Configuration Supabase -->
+    <script src="js/config.js"></script>
+</head>
+<body>
+
+<header>
+    <h1>AVANA Conciergerie</h1>
+    <p>Gestion professionnelle de locations saisonnières à Madagascar</p>
+</header>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="publish-announce.html" class="active">Publier une Annonce</a></li>
+        <li><a href="list-announces.html">Mes Annonces</a></li>
+    </ul>
+</nav>
+
+<main class="announce-container">
+    <section class="announce-form-section">
+        <h2>Publiez votre annonce immobilière</h2>
+        <p class="subtitle">Remplissez le formulaire ci-dessous pour créer une nouvelle annonce</p>
+
+        <form id="announceForm" class="announce-form">
+            
+            <!-- Section 1: Informations de base -->
+            <div class="form-section">
+                <h3>📋 Informations de base</h3>
+                
+                <div class="form-group">
+                    <label for="title">Titre de l'annonce *</label>
+                    <input type="text" id="title" name="title" placeholder="Ex: Appartement Meublé 2 chambres - Antananarivo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description détaillée *</label>
+                    <textarea id="description" name="description" rows="6" placeholder="Décrivez votre bien immobilier en détail..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="type">Type de bien *</label>
+                        <select id="type" name="type" required>
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="apartment">Appartement</option>
+                            <option value="house">Maison</option>
+                            <option value="studio">Studio</option>
+                            <option value="villa">Villa</option>
+                            <option value="office">Bureau</option>
+                            <option value="commerce">Commerce</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Statut de l'offre *</label>
+                        <select id="status" name="status" required>
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="rent">Location</option>
+                            <option value="sale">Vente</option>
+                            <option value="both">Location & Vente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Localisation -->
+            <div class="form-section">
+                <h3>📍 Localisation</h3>
+                
+                <div class="form-group">
+                    <label for="address">Adresse complète *</label>
+                    <input type="text" id="address" name="address" placeholder="Ex: 123 Avenue de l'Immobilier, Antananarivo" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">Ville *</label>
+                        <input type="text" id="city" name="city" placeholder="Ex: Antananarivo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district">District</label>
+                        <input type="text" id="district" name="district" placeholder="Ex: Centre-ville">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Détails du bien -->
+            <div class="form-section">
+                <h3>🏠 Détails du bien</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bedrooms">Nombre de chambres</label>
+                        <input type="number" id="bedrooms" name="bedrooms" min="0" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bathrooms">Nombre de salles de bain</label>
+                        <input type="number" id="bathrooms" name="bathrooms" min="0" placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="area">Superficie (m²)</label>
+                        <input type="number" id="area" name="area" min="0" step="0.1" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Équipements disponibles</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="amenities" value="wifi"> WiFi
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="amenities" value="parking"> Parking
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="amenities" value="furnished"> Meublé
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="amenities" value="kitchen"> Cuisine équipée
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="amenities" value="ac"> Climatisation
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="amenities" value="garden"> Jardin
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Tarification -->
+            <div class="form-section">
+                <h3>💰 Tarification</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price">Prix *</label>
+                        <input type="number" id="price" name="price" min="0" step="0.01" placeholder="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="currency">Devise *</label>
+                        <select id="currency" name="currency" required>
+                            <option value="ar">Ariary (Ar)</option>
+                            <option value="usd">USD ($)</option>
+                            <option value="eur">EUR (€)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="period">Période de location *</label>
+                        <select id="period" name="period" required>
+                            <option value="">-- Sélectionnez --</option>
+                            <option value="night">Par nuit</option>
+                            <option value="week">Par semaine</option>
+                            <option value="month">Par mois</option>
+                            <option value="year">Par an</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Images -->
+            <div class="form-section">
+                <h3>📷 Images</h3>
+                
+                <div class="form-group">
+                    <label for="images">Ajouter des images</label>
+                    <input type="file" id="images" name="images" multiple accept="image/*" class="file-input">
+                    <p class="form-hint">Vous pouvez ajouter jusqu'à 5 images. Format: JPG, PNG</p>
+                    <div id="imagePreview" class="image-preview"></div>
+                </div>
+            </div>
+
+            <!-- Section 6: Contact -->
+            <div class="form-section">
+                <h3>📞 Contact</h3>
+                
+                <div class="form-group">
+                    <label for="contactName">Nom complet *</label>
+                    <input type="text" id="contactName" name="contactName" placeholder="Votre nom" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Téléphone *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+261 320 000 000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" placeholder="votre.email@exemple.com" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Boutons d'action -->
+            <div class="form-actions">
+                <button type="reset" class="btn btn-secondary">Réinitialiser</button>
+                <button type="submit" class="btn btn-primary">Publier l'annonce</button>
+            </div>
+
+            <div id="submitMessage" class="message"></div>
+        </form>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-section">
+            <h3>À propos de nous</h3>
+            <p>Votre agence immobilière de confiance, spécialisée dans l'achat, la vente et la location de biens immobiliers.</p>
+        </div>
+        <div class="footer-section">
+            <h3>Contactez-nous</h3>
+            <p>Email: <a href="mailto:contact@agence.com">contact@agence.com</a></p>
+            <p>Téléphone: <a href="tel:+261320000000">+261 32 000 00 00</a></p>
+            <p>Adresse: 123 Avenue de l'Immobilier, Antananarivo, Madagascar</p>
+        </div>
+        <div class="footer2-section">
+            <h3>Suivez-nous</h3>
+            <div class="social2-icons">
+                <a href="https://www.facebook.com/avann.johnrayan/" target="_blank">
+                    <img src="images/icon/2021_Facebook_icon.svg.png" alt="Facebook">
+                </a>
+                <a href="https://www.linkedin.com/in/avana-john-rayan-117804205" target="_blank">
+                    <img src="images/icon/Linkedin.svg" alt="LinkedIn">
+                </a>
+                <a href="https://www.instagram.com/agence.immobiliere.avana/" target="_blank">
+                    <img src="images/icon/Instagram.svg" alt="Instagram">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Votre Agence Immobilière. Tous droits réservés.</p>
+    </div>
+</footer>
+
+<!-- Supabase JS -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- JS pour gérer l'annonce -->
+<script src="js/announce.js"></script>
+
+</body>
+</html>
